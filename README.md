@@ -1,4 +1,4 @@
-# MomentumContrast
+# Momentum Contrast
 
 This repository is reproduced code of "Momentum Contrast for Unsupervised Visual Representation Learning"
 
