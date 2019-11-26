@@ -7,8 +7,28 @@ import numpy as np
 import tqdm
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
-
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from network import Net
+
+def show(mnist, targets, ret):
+    target_ids = range(len(set(targets)))
+    
+    colors = ['r', 'g', 'b', 'c', 'm', 'y', 'k', 'violet', 'orange', 'purple']
+    
+    plt.figure(figsize=(12, 10))
+    
+    ax = plt.subplot(aspect='equal')
+    for label in set(targets):
+        idx = np.where(np.array(targets) == label)[0]
+        plt.scatter(ret[idx, 0], ret[idx, 1], c=colors[label], label=label)
+    
+    for i in range(0, len(targets), 250):
+        img = (mnist[i][0] * 0.3081 + 0.1307).numpy()[0]
+        img = OffsetImage(img, cmap=plt.cm.gray_r, zoom=0.5) 
+        ax.add_artist(AnnotationBbox(img, ret[i]))
+    
+    plt.legend()
+    plt.show()
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='MoCo example: MNIST')
@@ -37,7 +57,5 @@ if __name__ == '__main__':
         data.append(feat.data.numpy()[0])
     
     ret = TSNE(n_components=2, random_state=0).fit_transform(data)
-    
-    plt.scatter(ret[:,0], ret[:,1], c=targets)
-    plt.colorbar()
-    plt.show()
+   
+    show(mnist, targets, ret)
