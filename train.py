@@ -7,6 +7,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from PIL import Image
 import numpy as np
+import copy
 
 from network import Net
 
@@ -128,7 +129,7 @@ if __name__ == '__main__':
     test_loader = torch.utils.data.DataLoader(test_mnist, batch_size=batchsize, shuffle=True, **kwargs)
     
     model_q = Net().to(device)
-    model_k = Net().to(device)
+    model_k = copy.deepcopy(model_q)
     optimizer = optim.SGD(model_q.parameters(), lr=0.01, weight_decay=0.0001)
     
     queue = initialize_queue(model_k, device, train_loader)
