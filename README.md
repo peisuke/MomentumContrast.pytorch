@@ -20,4 +20,4 @@ The below figure visualizes the extracted features of MNIST with t-SNE.
 python test.py
 ```
 
-![image](https://user-images.githubusercontent.com/14243883/69615415-2d477880-1078-11ea-989b-0fa2dbd2a173.png)
+![image](https://user-images.githubusercontent.com/14243883/71716313-a1372680-2e57-11ea-8bbd-a284be180bd6.png)
